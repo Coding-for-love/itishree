@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Yogeshwar & Itishree — Our Beautiful Journey ❤️</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-primary: #FFC0CB;
+            --color-secondary: #FF69B4;
+            --color-accent: #FF1493;
+            --color-bg-start: #fff0f5;
+            --color-bg-end: #ffe4e1;
+            --color-white: #ffffff;
+            --color-dark: #3d1c2e;
+            --color-text: #5a3a4a;
+            --color-text-light: #8a6a7a;
+            --color-glow: rgba(255, 105, 180, 0.5);
+            --font-main: 'Poppins', sans-serif;
+            --font-script: 'Dancing Script', cursive;
+            --shadow-soft: 0 4px 20px rgba(255, 105, 180, 0.2);
+            --shadow-glow: 0 8px 40px rgba(255, 20, 147, 0.3);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --shadow-card-hover: 0 20px 50px rgba(255, 105, 180, 0.25);
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-lg: 26px;
+            --radius-xl: 34px;
+            --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --max-width: 1100px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background: linear-gradient(to bottom, var(--color-bg-start), var(--color-bg-end));
+            color: var(--color-text);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* ========== PASSCODE OVERLAY ========== */
+        .passcode-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            transition: opacity 0.7s ease, visibility 0.7s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .passcode-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .passcode-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(255, 105, 180, 0.25);
+            border: 1px solid rgba(255, 192, 203, 0.6);
+            animation: floatCard 3s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .passcode-title {
+            font-family: var(--font-script);
+            font-size: 2rem;
+            color: var(--color-accent);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .passcode-subtitle {
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            margin-bottom: 28px;
+            font-weight: 400;
+        }
+
+        .passcode-input-group {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .passcode-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 192, 203, 0.7);
+            background: rgba(255, 255, 255, 0.8);
+            font-family: var(--font-main);
+            font-size: 1rem;
+            color: var(--color-dark);
+            outline: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .passcode-input:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.3);
+            background: #fff;
+        }
+
+        .passcode-input.error {
+            border-color: #ff4d6d;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            20% {
+                transform: translateX(-10px);
+            }
+            40% {
+                transform: translateX(10px);
+            }
+            60% {
+                transform: translateX(-6px);
+            }
+            80% {
+                transform: translateX(6px);
+            }
+        }
+
+        .error-message {
+            color: #ff4d6d;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            min-height: 20px;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .error-message.visible {
+            opacity: 1;
+        }
+
+        .passcode-btn {
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+            color: #fff;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .passcode-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 35px rgba(255, 20, 147, 0.6);
+        }
+
+        .passcode-btn:active {
+            transform: scale(0.97);
+        }
+
+        .floating-hearts-passcode {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        /* ========== MAIN CONTENT WRAPPER ========== */
+        .main-content {
+            display: block;
+            transition: opacity 0.6s ease;
+            opacity: 1;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        .floating-hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -60px;
+            animation: floatUpHeart linear infinite;
+            opacity: 0;
+            filter: blur(0.5px);
+            will-change: transform, opacity;
+            font-size: 22px;
+        }
+
+        @keyframes floatUpHeart {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.4) rotate(0deg);
+                opacity: 0;
+            }
+            8% {
+                opacity: 0.7;
+            }
+            70% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.15;
+            }
+            100% {
+                transform: translateY(-110vh) translateX(40px) scale(1.1) rotate(25deg);
+                opacity: 0;
+            }
+        }
+        @keyframes floatUpHeartAlt {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            65% {
+                opacity: 0.4;
+            }
+            88% {
+                opacity: 0.1;
+            }
+            100% {
+                transform: translateY(-105vh) translateX(-50px) scale(0.9) rotate(-20deg);
+                opacity: 0;
+            }
+        }
+
+        .section {
+            position: relative;
+            padding: 70px 20px;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ========== HERO SECTION ========== */
+        .section-hero {
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .hero-days-counter {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 16px 30px;
+            border-radius: var(--radius-xl);
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--color-accent);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-soft);
+            border: 1.5px solid rgba(255, 192, 203, 0.5);
+            animation: softGlowPulse 3s ease-in-out infinite;
+        }
+        .hero-days-counter .days-number {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--color-secondary);
+        }
+
+        @keyframes softGlowPulse {
+            0%,
+            100% {
+                box-shadow: 0 8px 30px rgba(255, 20, 147, 0.35);
+            }
+            50% {
+                box-shadow: 0 14px 44px rgba(255, 20, 147, 0.7);
+            }
+        }
+
+        .hero-heading {
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+            color: var(--color-dark);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 12px;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            animation: gentleFloat 6s ease-in-out infinite;
+        }
+        .hero-heading .accent {
+            color: var(--color-accent);
+        }
+
+        @keyframes gentleFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .hero-subheading {
+            font-family: var(--font-script);
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            color: var(--color-text-light);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-decoration: none;
+            border: none;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.4);
+            transition: all var(--transition-smooth);
+            letter-spacing: 0.3px;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            cursor: pointer;
+            animation: btnPulse 2.5s ease-in-out infinite;
+        }
+        @keyframes btnPulse {
+            0%,
+            100% {
+                box-shadow: 0 8px 30px rgba(255, 20, 147, 0.4);
+            }
+            50% {
+                box-shadow: 0 16px 45px rgba(255, 20, 147, 0.7);
+            }
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+        }
+
+        /* ========== PROPOSAL SECTION ========== */
+        .section-proposal {
+            padding-top: 60px;
+            padding-bottom: 80px;
+        }
+        .proposal-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-lg);
+            padding: 30px 24px 40px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(255, 192, 203, 0.4);
+        }
+        .proposal-image-container {
+            width: 100%;
+            max-width: 650px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-glow);
+            aspect-ratio: 16 / 10;
+            opacity: 0;
+            transform: scale(0.85);
+            transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.7s;
+        }
+        .proposal-image-container.revealed {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .proposal-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+        .proposal-image-container:hover img {
+            transform: scale(1.04);
+        }
+        .proposal-description {
+            font-size: 1.05rem;
+            color: var(--color-text);
+            text-align: center;
+        }
+
+        /* ========== GALLERY ========== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+        }
+        @media (min-width: 500px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 22px;
+            }
+        }
+        @media (min-width: 900px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 26px;
+            }
+        }
+
+        .gallery-card {
+            background: #fff;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: all var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gallery-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: var(--shadow-card-hover);
+        }
+        .gallery-card .gallery-img-wrap {
+            overflow: hidden;
+            aspect-ratio: 4 / 5;
+            position: relative;
+        }
+        .gallery-card .gallery-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s ease;
+        }
+        .gallery-card:hover .gallery-img-wrap img {
+            transform: scale(1.1);
+        }
+        .gallery-card .gallery-img-wrap .glow-border {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            box-shadow: inset 0 0 0 0px rgba(255, 105, 180, 0);
+            transition: box-shadow 0.5s ease;
+        }
+        .gallery-card:hover .gallery-img-wrap .glow-border {
+            box-shadow: inset 0 0 30px 8px rgba(255, 105, 180, 0.35);
+        }
+        .gallery-caption-box {
+            background: #fff;
+            padding: 16px 14px;
+            text-align: center;
+            font-family: var(--font-script);
+            font-size: 1rem;
+            color: var(--color-text);
+            font-weight: 500;
+            letter-spacing: 0.2px;
+            line-height: 1.5;
+            min-height: 52px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #fce4ec;
+        }
+
+        .section-title {
+            font-family: var(--font-script);
+            font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+            text-align: center;
+            color: var(--color-accent);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        /* ========== TIMELINE WITH MOVING DOT ========== */
+        .timeline-container {
+            position: relative;
+            padding: 30px 0;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 36px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary), var(--color-accent));
+            border-radius: 3px;
+            box-shadow: 0 0 8px rgba(255, 105, 180, 0.6);
+        }
+        .timeline-moving-dot {
+            position: absolute;
+            left: 9px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.8);
+            z-index: 10;
+            transition: top 0.15s linear;
+            pointer-events: none;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -26px;
+            top: 6px;
+            width: 18px;
+            height: 18px;
+            background: var(--color-secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(255, 105, 180, 0.6);
+            border: 3px solid #fff;
+            z-index: 5;
+            transition: all var(--transition-smooth);
+        }
+        .timeline-item:hover .timeline-dot {
+            transform: scale(1.4);
+            box-shadow: 0 0 25px rgba(255, 20, 147, 0.9);
+        }
+        .timeline-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-md);
+            padding: 20px 22px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid rgba(255, 192, 203, 0.4);
+            transition: all var(--transition-smooth);
+        }
+        .timeline-card:hover {
+            box-shadow: var(--shadow-card-hover);
+            transform: translateY(-3px);
+        }
+        .timeline-date {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-secondary);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        .timeline-event-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+        }
+        .timeline-event-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-light);
+            line-height: 1.6;
+        }
+
+        @media (min-width: 768px) {
+            .timeline {
+                padding-left: 0;
+            }
+            .timeline::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .timeline-item {
+                width: 46%;
+                padding-left: 0;
+            }
+            .timeline-item:nth-child(odd) {
+                margin-right: auto;
+                text-align: right;
+                padding-right: 40px;
+            }
+            .timeline-item:nth-child(even) {
+                margin-left: auto;
+                text-align: left;
+                padding-left: 40px;
+            }
+            .timeline-dot {
+                left: auto;
+            }
+            .timeline-item:nth-child(odd) .timeline-dot {
+                right: -49px;
+            }
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: -49px;
+            }
+            .timeline-moving-dot {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ========== GLASS MESSAGE CARD ========== */
+        .glass-message-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+        .glass-card {
+            position: relative;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-lg);
+            padding: 42px 28px;
+            box-shadow: 0 20px 50px rgba(255, 105, 180, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        .glass-card .message-text {
+            font-family: var(--font-script);
+            font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+            color: var(--color-dark);
+            line-height: 1.7;
+            font-weight: 500;
+            filter: blur(8px);
+            transition: filter 0.6s ease, opacity 0.6s ease;
+            user-select: none;
+            position: relative;
+            z-index: 1;
+        }
+        .glass-card.revealed-text .message-text {
+            filter: blur(0);
+        }
+        .glass-card .blur-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+        .glass-card.revealed-text .blur-overlay {
+            opacity: 0;
+        }
+        .read-button {
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-accent));
+            color: #fff;
+            border: none;
+            padding: 14px 34px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            box-shadow: 0 8px 28px rgba(255, 105, 180, 0.4);
+            transition: all 0.3s ease;
+            letter-spacing: 0.4px;
+            -webkit-tap-highlight-color: transparent;
+            z-index: 5;
+            position: relative;
+            margin-top: 20px;
+        }
+        .read-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(255, 20, 147, 0.5);
+        }
+        .read-button.hidden {
+            display: none;
+        }
+
+        /* ========== FOOTER ========== */
+        .section-footer {
+            padding: 50px 20px 40px;
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-align: center;
+            border-top: 2px solid rgba(255, 192, 203, 0.4);
+        }
+        .footer-quote {
+            font-family: var(--font-script);
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            color: var(--color-text-light);
+            margin-bottom: 10px;
+            animation: fadeInUp 1.2s ease;
+            line-height: 1.6;
+        }
+        .footer-signoff {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--color-accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            animation: heartbeat 1.8s infinite;
+        }
+        .footer-hearts {
+            position: relative;
+            margin-top: 14px;
+            font-size: 1.4rem;
+            animation: floatFooterHearts 3s ease-in-out infinite;
+            letter-spacing: 6px;
+        }
+
+        @keyframes heartbeat {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            15% {
+                transform: scale(1.15);
+            }
+            30% {
+                transform: scale(1);
+            }
+        }
+        @keyframes floatFooterHearts {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== MOBILE OPTIMIZATION ========== */
+        @media (max-width: 480px) {
+            .section {
+                padding: 40px 12px;
+            }
+            .section-hero {
+                padding: 20px 12px;
+            }
+            .hero-days-counter {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+            .hero-days-counter .days-number {
+                font-size: 1.2rem;
+            }
+            .cta-button {
+                padding: 14px 28px;
+                font-size: 0.95rem;
+                width: auto;
+            }
+
+            .proposal-image-container {
+                max-width: 80vw;
+            }
+            .gallery-card {
+                max-width: 80vw;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .gallery-caption-box {
+                font-size: 0.9rem;
+                padding: 14px 10px;
+                min-height: 46px;
+            }
+            .timeline {
+                padding-left: 28px;
+            }
+            .timeline::before {
+                left: 10px;
+            }
+            .timeline-dot {
+                left: -22px;
+                width: 14px;
+                height: 14px;
+            }
+            .timeline-moving-dot {
+                left: 3px;
+                width: 14px;
+                height: 14px;
+            }
+            .glass-card {
+                padding: 28px 18px;
+            }
+            .passcode-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 767px) {
+            .proposal-image-container {
+                max-width: 85vw;
+            }
+            .gallery-card {
+                max-width: 85vw;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .gallery-card:active {
+                transform: scale(0.97);
+                transition: transform 0.15s ease;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== PASSCODE OVERLAY ========== -->
+    <div class="passcode-overlay" id="passcodeOverlay">
+        <div class="floating-hearts-passcode" id="passcodeHearts" aria-hidden="true"></div>
+        <div class="passcode-card">
+            <h2 class="passcode-title">Welcome Back, My Love 💕</h2>
+            <p class="passcode-subtitle">Enter our secret code to unlock our story</p>
+            <div class="passcode-input-group">
+                <input type="password" class="passcode-input" id="passcodeInput" placeholder="••••••••••" autocomplete="off" aria-label="Secret passcode">
+                <p class="error-message" id="errorMessage">That's not our code, sweetheart.</p>
+            </div>
+            <button class="passcode-btn" id="passcodeSubmit">💖 Unlock Our World</button>
+        </div>
+    </div>
+
+    <!-- ========== MAIN WEBSITE CONTENT ========== -->
+    <div class="main-content" id="mainContent">
+        <!-- HERO SECTION -->
+        <section class="section section-hero" id="hero">
+            <div class="floating-hearts-container" id="floatingHeartsContainer" aria-hidden="true"></div>
+
+            <div class="hero-days-counter reveal" aria-live="polite">
+                Together for <span class="days-number" id="daysNumber">...</span> days ❤️
+            </div>
+
+            <h1 class="hero-heading reveal reveal-delay-1">
+                Our Beautiful <span class="accent">Journey</span>
+            </h1>
+            <p class="hero-subheading reveal reveal-delay-2">
+                A love story written by Yogeshwar &amp; Itishree ❤️
+            </p>
+            <a href="#gallery" class="cta-button reveal reveal-delay-3">✨ Explore Our Memories</a>
+        </section>
+
+        <!-- PROPOSAL SECTION -->
+        <section class="section section-proposal" id="proposal">
+            <h2 class="section-title reveal">The Day I Asked You ❤️</h2>
+            <div class="proposal-wrapper reveal">
+                <div class="proposal-image-container" id="proposalImageContainer">
+                    <img src="1.jpeg" alt="The proposal moment" loading="lazy" width="800" height="500">
+                </div>
+                <p class="proposal-description">20 October 2025 — The day my life changed forever. When I asked you to be mine, I found my forever. 💍</p>
+            </div>
+        </section>
+
+        <!-- MEMORY GALLERY -->
+        <section class="section section-gallery" id="gallery">
+            <h2 class="section-title reveal">Our Memory Gallery 📸</h2>
+            <div class="gallery-grid">
+                <div class="gallery-card reveal reveal-delay-1"><div class="gallery-img-wrap"><img src="2.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">First photograph together ❤️</div></div>
+                <div class="gallery-card reveal reveal-delay-1"><div class="gallery-img-wrap"><img src="3.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">Your smile lights my world ✨</div></div>
+                <div class="gallery-card reveal reveal-delay-1"><div class="gallery-img-wrap"><img src="4.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">Together is my favourite place 💕</div></div>
+                <div class="gallery-card reveal reveal-delay-2"><div class="gallery-img-wrap"><img src="5.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">My world lies in your feet 🌸</div></div>
+                <div class="gallery-card reveal reveal-delay-2"><div class="gallery-img-wrap"><img src="6.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">Holding hands forever 🤝</div></div>
+                <div class="gallery-card reveal reveal-delay-2"><div class="gallery-img-wrap"><img src="7.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">You make every day brighter ☀️</div></div>
+                <div class="gallery-card reveal reveal-delay-3"><div class="gallery-img-wrap"><img src="8.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">Eating with you 😋</div></div>
+                <div class="gallery-card reveal reveal-delay-3"><div class="gallery-img-wrap"><img src="9.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">Forever grateful 🙏</div></div>
+                <div class="gallery-card reveal reveal-delay-3"><div class="gallery-img-wrap"><img src="10.jpeg" alt="Memory" loading="lazy"><div class="glow-border"></div></div><div class="gallery-caption-box">You both are cute 💝</div></div>
+            </div>
+        </section>
+
+        <!-- TIMELINE -->
+        <section class="section section-timeline" id="timeline">
+            <h2 class="section-title reveal">Our Journey Timeline 🕊️</h2>
+            <div class="timeline-container" id="timelineContainer">
+                <div class="timeline" id="timeline">
+                    <div class="timeline-moving-dot" id="movingDot"></div>
+                    <div class="timeline-item reveal"><div class="timeline-dot"></div><div class="timeline-card"><span class="timeline-date">13 Sept 2025</span><h3>First Meeting</h3><p>The day our paths crossed — a moment that silently started everything.</p></div></div>
+                    <div class="timeline-item reveal reveal-delay-1"><div class="timeline-dot"></div><div class="timeline-card"><span class="timeline-date">20 Oct 2025</span><h3>Proposal Day 💍</h3><p>Love turned into a promise for forever.</p></div></div>
+                    <div class="timeline-item reveal reveal-delay-2"><div class="timeline-dot"></div><div class="timeline-card"><span class="timeline-date">17 Jan 2026</span><h3>Meeting After 3 Months</h3><p>Seeing you again relived all happiness.</p></div></div>
+                    <div class="timeline-item reveal reveal-delay-3"><div class="timeline-dot"></div><div class="timeline-card"><span class="timeline-date">04 Mar 2026</span><h3>Birthday to Remember 🎂</h3><p>You made my birthday incredibly special.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GLASS MESSAGE -->
+        <section class="section section-message" id="message">
+            <h2 class="section-title reveal">A Letter For You 💌</h2>
+            <div class="glass-message-wrapper reveal reveal-delay-2">
+                <div class="glass-card" id="glassCard">
+                    <p class="message-text" id="messageText">
+                        <span style="color:var(--color-accent); font-weight:700;">Itishree</span>, every moment with you feels magical. This is just a small way to show how much you mean to me. I love you endlessly ❤️
+                    </p>
+                    <div class="blur-overlay" id="blurOverlay"></div>
+                </div>
+                <button class="read-button" id="readButton">✨ Click to Read</button>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="section-footer" id="footer">
+            <p class="footer-quote reveal">"You are my today and all of my tomorrows."</p>
+            <p class="footer-signoff reveal reveal-delay-1">Made with <span style="color:#FF1493;">❤️</span> by Yogeshwar for Itishree</p>
+            <div class="footer-hearts reveal reveal-delay-2">💕 💖 💗 💝</div>
+        </footer>
+    </div>
+
+    <script>
+        (function() {
+            // ----- PASSCODE LOGIC -----
+            const CORRECT_PASSWORD = "itilovesyogesh";
+            const overlay = document.getElementById('passcodeOverlay');
+            const passcodeInput = document.getElementById('passcodeInput');
+            const submitBtn = document.getElementById('passcodeSubmit');
+            const errorMsg = document.getElementById('errorMessage');
+            const mainContent = document.getElementById('mainContent');
+
+            // Initially hide main content (though it's visible, we handle via overlay)
+            // Overlay is visible, mainContent is behind but we'll keep it hidden until success.
+            // We'll set mainContent style visibility hidden initially to prevent interaction.
+            mainContent.style.visibility = 'hidden';
+            mainContent.style.opacity = '0';
+            mainContent.style.transition = 'opacity 0.6s ease, visibility 0.6s ease';
+
+            function checkPassword() {
+                const entered = passcodeInput.value.trim();
+                if (entered === CORRECT_PASSWORD) {
+                    // Success: hide overlay, show main content
+                    overlay.classList.add('hidden');
+                    mainContent.style.visibility = 'visible';
+                    mainContent.style.opacity = '1';
+                    // Initialize the rest of the website features now
+                    initWebsiteFeatures();
+                } else {
+                    // Show error and shake
+                    passcodeInput.classList.add('error');
+                    errorMsg.classList.add('visible');
+                    setTimeout(() => {
+                        passcodeInput.classList.remove('error');
+                    }, 500);
+                    passcodeInput.value = '';
+                    passcodeInput.focus();
+                }
+            }
+
+            submitBtn.addEventListener('click', checkPassword);
+            passcodeInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+
+            // Hide error message when user starts typing again
+            passcodeInput.addEventListener('input', () => {
+                if (errorMsg.classList.contains('visible')) {
+                    errorMsg.classList.remove('visible');
+                }
+            });
+
+            // Passcode floating hearts
+            const passcodeHeartsContainer = document.getElementById('passcodeHearts');
+            const heartEmojis = ['❤️', '💕', '💖', '💗', '💝'];
+            function createPasscodeHeart() {
+                const h = document.createElement('span');
+                h.className = 'floating-heart';
+                h.style.position = 'absolute';
+                h.style.bottom = '-60px';
+                h.style.left = Math.random() * 90 + '%';
+                h.style.fontSize = (Math.random() * 20 + 14) + 'px';
+                h.style.animation = 'floatUpHeart ' + (Math.random() * 8 + 8) + 's linear infinite';
+                h.style.animationDelay = Math.random() * 6 + 's';
+                h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                h.style.opacity = '0';
+                h.style.pointerEvents = 'none';
+                return h;
+            }
+            if (passcodeHeartsContainer) {
+                for (let i = 0; i < 18; i++) {
+                    passcodeHeartsContainer.appendChild(createPasscodeHeart());
+                }
+            }
+
+            // ----- WEBSITE FEATURES (initialized after passcode success) -----
+            function initWebsiteFeatures() {
+                // Days counter
+                const startDate = new Date(2025, 9, 20);
+                const daysEl = document.getElementById('daysNumber');
+                function updateDays() {
+                    const today = new Date();
+                    const startMidnight = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+                    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                    const diff = Math.max(0, Math.floor((todayMidnight - startMidnight) / 86400000));
+                    if (daysEl) daysEl.textContent = diff.toLocaleString('en-IN');
+                }
+                updateDays();
+                setInterval(updateDays, 3600000);
+
+                // Main floating hearts
+                const mainHeartsContainer = document.getElementById('floatingHeartsContainer');
+                if (mainHeartsContainer) {
+                    for (let i = 0; i < 25; i++) {
+                        const heart = document.createElement('span');
+                        heart.className = 'floating-heart';
+                        heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                        heart.style.left = Math.random() * 95 + '%';
+                        heart.style.fontSize = (Math.random() * 22 + 16) + 'px';
+                        heart.style.animationDuration = (Math.random() * 10 + 9) + 's';
+                        heart.style.animationDelay = Math.random() * 9 + 's';
+                        if (Math.random() > 0.5) heart.style.animationName = 'floatUpHeartAlt';
+                        mainHeartsContainer.appendChild(heart);
+                    }
+                    setInterval(() => {
+                        if (mainHeartsContainer.children.length > 20 && mainHeartsContainer.firstChild) {
+                            mainHeartsContainer.firstChild.remove();
+                        }
+                        const newHeart = document.createElement('span');
+                        newHeart.className = 'floating-heart';
+                        newHeart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                        newHeart.style.left = Math.random() * 95 + '%';
+                        newHeart.style.fontSize = (Math.random() * 22 + 16) + 'px';
+                        newHeart.style.animationDuration = (Math.random() * 10 + 9) + 's';
+                        newHeart.style.animationDelay = '0s';
+                        mainHeartsContainer.appendChild(newHeart);
+                    }, 8000);
+                }
+
+                // Scroll reveal
+                const revealEls = document.querySelectorAll('.reveal');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                revealEls.forEach(el => observer.observe(el));
+
+                // Proposal image
+                const propImg = document.getElementById('proposalImageContainer');
+                if (propImg) {
+                    const propObs = new IntersectionObserver((entries) => {
+                        if (entries[0].isIntersecting) {
+                            propImg.classList.add('revealed');
+                            propObs.unobserve(propImg);
+                        }
+                    }, { threshold: 0.2 });
+                    propObs.observe(propImg);
+                }
+
+                // Glass card reveal
+                const glassCard = document.getElementById('glassCard');
+                const readButton = document.getElementById('readButton');
+                if (glassCard && readButton) {
+                    readButton.addEventListener('click', () => {
+                        glassCard.classList.add('revealed-text');
+                        readButton.classList.add('hidden');
+                    });
+                }
+
+                // Timeline moving dot
+                const timelineSection = document.getElementById('timeline');
+                const timeline = document.getElementById('timeline');
+                const movingDot = document.getElementById('movingDot');
+                const timelineItems = document.querySelectorAll('.timeline-item');
+                if (timelineSection && movingDot && timelineItems.length > 0) {
+                    function updateDotPosition() {
+                        const sectionRect = timelineSection.getBoundingClientRect();
+                        const windowHeight = window.innerHeight;
+                        let progress = (windowHeight - sectionRect.top) / (windowHeight + sectionRect.height);
+                        progress = Math.max(0, Math.min(1, progress));
+                        const firstDot = timelineItems[0].querySelector('.timeline-dot');
+                        const lastDot = timelineItems[timelineItems.length - 1].querySelector('.timeline-dot');
+                        if (!firstDot || !lastDot) return;
+                        const timelineRect = timeline.getBoundingClientRect();
+                        const firstTop = firstDot.getBoundingClientRect().top - timelineRect.top + firstDot.offsetHeight / 2;
+                        const lastTop = lastDot.getBoundingClientRect().top - timelineRect.top + lastDot.offsetHeight / 2;
+                        movingDot.style.top = (firstTop + (lastTop - firstTop) * progress) + 'px';
+                    }
+                    window.addEventListener('scroll', updateDotPosition, { passive: true });
+                    window.addEventListener('resize', updateDotPosition);
+                    updateDotPosition();
+                }
+            }
+
+            // If for some reason the overlay is already hidden (e.g., user bypass), trigger features.
+            // But typically it's hidden after passcode. However, we'll also check on load.
+            // Just in case, we don't call initWebsiteFeatures until passcode success.
+            // To be safe, if overlay is hidden on load (maybe due to browser back), we trigger.
+            window.addEventListener('load', () => {
+                if (overlay.classList.contains('hidden')) {
+                    mainContent.style.visibility = 'visible';
+                    mainContent.style.opacity = '1';
+                    initWebsiteFeatures();
+                }
+            });
+
+        })();
+    </script>
+</body>
+</html>
