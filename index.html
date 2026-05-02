@@ -340,7 +340,18 @@
             overflow: hidden;
         }
 
-        .hero-days-counter {
+        .hero-badge-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+            margin-bottom: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-days-counter,
+        .hero-meet-counter {
             display: inline-block;
             background: rgba(255, 255, 255, 0.75);
             backdrop-filter: blur(10px);
@@ -350,14 +361,13 @@
             font-weight: 600;
             font-size: 1.05rem;
             color: var(--color-accent);
-            position: relative;
-            z-index: 2;
-            margin-bottom: 32px;
             box-shadow: var(--shadow-soft);
             border: 1.5px solid rgba(255, 192, 203, 0.5);
             animation: softGlowPulse 3s ease-in-out infinite;
         }
-        .hero-days-counter .days-number {
+
+        .hero-days-counter .days-number,
+        .hero-meet-counter .days-number {
             font-weight: 800;
             font-size: 1.4rem;
             color: var(--color-secondary);
@@ -849,11 +859,17 @@
             .section-hero {
                 padding: 20px 12px;
             }
-            .hero-days-counter {
+            .hero-badge-container {
+                gap: 10px;
+                margin-bottom: 28px;
+            }
+            .hero-days-counter,
+            .hero-meet-counter {
                 padding: 12px 20px;
                 font-size: 0.9rem;
             }
-            .hero-days-counter .days-number {
+            .hero-days-counter .days-number,
+            .hero-meet-counter .days-number {
                 font-size: 1.2rem;
             }
             .cta-button {
@@ -940,17 +956,23 @@
         <section class="section section-hero" id="hero">
             <div class="floating-hearts-container" id="floatingHeartsContainer" aria-hidden="true"></div>
 
-            <div class="hero-days-counter reveal" aria-live="polite">
-                Together for <span class="days-number" id="daysNumber">...</span> days ❤️
+            <!-- Badge container with two timers -->
+            <div class="hero-badge-container">
+                <div class="hero-days-counter reveal" aria-live="polite">
+                    Together for <span class="days-number" id="daysNumber">...</span> days ❤️
+                </div>
+                <div class="hero-meet-counter reveal reveal-delay-1" aria-live="polite">
+                    Next meet in <span class="days-number" id="meetDaysNumber">...</span> days 🗓️
+                </div>
             </div>
 
-            <h1 class="hero-heading reveal reveal-delay-1">
+            <h1 class="hero-heading reveal reveal-delay-2">
                 Our Beautiful <span class="accent">Journey</span>
             </h1>
-            <p class="hero-subheading reveal reveal-delay-2">
+            <p class="hero-subheading reveal reveal-delay-3">
                 A love story written by Yogeshwar &amp; Itishree ❤️
             </p>
-            <a href="#gallery" class="cta-button reveal reveal-delay-3">✨ Explore Our Memories</a>
+            <a href="#gallery" class="cta-button reveal reveal-delay-4">✨ Explore Our Memories</a>
         </section>
 
         <!-- PROPOSAL SECTION -->
@@ -1026,9 +1048,6 @@
             const errorMsg = document.getElementById('errorMessage');
             const mainContent = document.getElementById('mainContent');
 
-            // Initially hide main content (though it's visible, we handle via overlay)
-            // Overlay is visible, mainContent is behind but we'll keep it hidden until success.
-            // We'll set mainContent style visibility hidden initially to prevent interaction.
             mainContent.style.visibility = 'hidden';
             mainContent.style.opacity = '0';
             mainContent.style.transition = 'opacity 0.6s ease, visibility 0.6s ease';
@@ -1036,14 +1055,11 @@
             function checkPassword() {
                 const entered = passcodeInput.value.trim();
                 if (entered === CORRECT_PASSWORD) {
-                    // Success: hide overlay, show main content
                     overlay.classList.add('hidden');
                     mainContent.style.visibility = 'visible';
                     mainContent.style.opacity = '1';
-                    // Initialize the rest of the website features now
                     initWebsiteFeatures();
                 } else {
-                    // Show error and shake
                     passcodeInput.classList.add('error');
                     errorMsg.classList.add('visible');
                     setTimeout(() => {
@@ -1060,15 +1076,12 @@
                     checkPassword();
                 }
             });
-
-            // Hide error message when user starts typing again
             passcodeInput.addEventListener('input', () => {
                 if (errorMsg.classList.contains('visible')) {
                     errorMsg.classList.remove('visible');
                 }
             });
 
-            // Passcode floating hearts
             const passcodeHeartsContainer = document.getElementById('passcodeHearts');
             const heartEmojis = ['❤️', '💕', '💖', '💗', '💝'];
             function createPasscodeHeart() {
@@ -1091,20 +1104,45 @@
                 }
             }
 
-            // ----- WEBSITE FEATURES (initialized after passcode success) -----
+            // ----- WEBSITE FEATURES -----
             function initWebsiteFeatures() {
-                // Days counter
+                // Days together counter
                 const startDate = new Date(2025, 9, 20);
                 const daysEl = document.getElementById('daysNumber');
-                function updateDays() {
+                function updateDaysTogether() {
                     const today = new Date();
                     const startMidnight = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
                     const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
                     const diff = Math.max(0, Math.floor((todayMidnight - startMidnight) / 86400000));
                     if (daysEl) daysEl.textContent = diff.toLocaleString('en-IN');
                 }
-                updateDays();
-                setInterval(updateDays, 3600000);
+                updateDaysTogether();
+                setInterval(updateDaysTogether, 3600000);
+
+                // Meet countdown timer (to 8 August 2026)
+                const meetDate = new Date(2026, 7, 8); // August 8, 2026 (month 7 = August)
+                const meetEl = document.getElementById('meetDaysNumber');
+                function updateMeetCountdown() {
+                    const today = new Date();
+                    const meetMidnight = new Date(meetDate.getFullYear(), meetDate.getMonth(), meetDate.getDate());
+                    const todayMidnight = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                    const diffTime = meetMidnight.getTime() - todayMidnight.getTime();
+                    const diffDays = Math.ceil(diffTime / 86400000); // including today if not yet passed
+                    if (diffDays > 0) {
+                        if (meetEl) meetEl.textContent = diffDays.toLocaleString('en-IN');
+                    } else {
+                        if (meetEl) meetEl.textContent = '0';
+                        // Optionally change text if the date is today or past
+                        const meetBadge = document.querySelector('.hero-meet-counter');
+                        if (meetBadge && diffDays === 0) {
+                            meetBadge.innerHTML = 'We meet today! 🎉';
+                        } else if (meetBadge && diffDays < 0) {
+                            meetBadge.innerHTML = 'We already met! 💖';
+                        }
+                    }
+                }
+                updateMeetCountdown();
+                setInterval(updateMeetCountdown, 3600000);
 
                 // Main floating hearts
                 const mainHeartsContainer = document.getElementById('floatingHeartsContainer');
@@ -1194,10 +1232,6 @@
                 }
             }
 
-            // If for some reason the overlay is already hidden (e.g., user bypass), trigger features.
-            // But typically it's hidden after passcode. However, we'll also check on load.
-            // Just in case, we don't call initWebsiteFeatures until passcode success.
-            // To be safe, if overlay is hidden on load (maybe due to browser back), we trigger.
             window.addEventListener('load', () => {
                 if (overlay.classList.contains('hidden')) {
                     mainContent.style.visibility = 'visible';
